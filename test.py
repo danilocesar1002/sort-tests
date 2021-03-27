@@ -1,6 +1,5 @@
 from numpy import median
 from numpy.random import randint
-from sort import mergeSort
 from time import time
 
 
