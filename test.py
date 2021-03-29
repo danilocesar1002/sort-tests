@@ -41,7 +41,7 @@ def test(filePath,
             results.write( str([n, res]) )
             print("n = {} ({} segundos)".format(n, res))
             
-        if sum(result) > timeLimit:
+        if result[-1] > timeLimit:
             results.write("]\n")
             break
         else:
