@@ -15,29 +15,38 @@ def sortTest(n, sortingAlgorithm, timeLimit, sorts):
     results = []
     for _ in range(sorts):
         results.append(singleSortTest(n, sortingAlgorithm))
-        if (results[-1] > timeLimit):
-            results.pop()
+        if (sum(results) > timeLimit):
             break
     
     return results
 
-def test(sortingAlgorithm,
-         dn = 1,
-         singleTestLimit = 5*60,
+def test(filePath,
+         sortingAlgorithm,
+         dn = 1000,
+         timeLimit = 5*60, # Requirement
          sortsPerTest = 100):
-    n, results = dn, []
-    results = []
+    n = 1 # Requirement
+    results = open(filePath, "a")
+    results.write("[")
+    
     while True:
         result = sortTest(n,
                           sortingAlgorithm,
-                          singleTestLimit,
+                          timeLimit,
                           sortsPerTest
             )
+        res = median(result)
         
-        if len(result) < sortsPerTest:
+        if 0 < len(result):
+            results.write( str([n, res]) )
+            print("n = {} ({} segundos)".format(n, res))
+            
+        if sum(result) > timeLimit:
+            results.write("]\n")
             break
-        results.append(median(result))
-        print("n =", n)
+        else:
+            results.write(",")
+
         n += dn
     
-    return results
+    results.close()
