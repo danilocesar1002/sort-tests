@@ -6,14 +6,15 @@ from sort import (
 from test import test
 
 
-def makeTest(filePath, sortingAlgorithms):
+def makeTest(filePath, sortingAlgorithms, deltas):
+    assert(len(sortingAlgorithms) == len(deltas))
     # Runs the tests and saves them in filePath (assumes is a file path string)
     testFile = open(filePath, "w")
     testFile.write("")
     testFile.close()
     
-    for algorithm in sortingAlgorithms:
-        test(filePath, algorithm)
+    for i in range(len(deltas)):
+        test(filePath, sortingAlgorithms[i], deltas[i])
 
 def main():
     path = os.getcwd() + "/test.txt"
@@ -25,7 +26,7 @@ def main():
     
     while (inpt := input("¿Desea iniciar con las pruebas? (s/n): ")) != "n":
         if inpt == "s":
-            makeTest(path, [insertionSort, mergeSort])
+            makeTest(path, [insertionSort, mergeSort], [10, 1000])
             break
         else:
             continue
