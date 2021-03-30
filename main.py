@@ -26,7 +26,7 @@ def main():
     
     while (inpt := input("¿Desea iniciar con las pruebas? (s/n): ")) != "n":
         if inpt == "s":
-            makeTest(path, [insertionSort, mergeSort], [10, 1000])
+            makeTest(path, [insertionSort, mergeSort], [100, 5000])
             break
         else:
             continue
