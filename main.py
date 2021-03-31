@@ -14,7 +14,7 @@ def makeTest(filePath, sortingAlgorithms, deltas):
     testFile.close()
     
     for i in range(len(deltas)):
-        test(filePath, sortingAlgorithms[i], deltas[i])
+        test(filePath, sortingAlgorithms[i], deltas[i],timeLimit=2)
 
 def main():
     path = os.getcwd() + "/test.txt"
@@ -26,7 +26,7 @@ def main():
     
     while (inpt := input("¿Desea iniciar con las pruebas? (s/n): ")) != "n":
         if inpt == "s":
-            makeTest(path, [insertionSort, mergeSort], [100, 5000])
+            makeTest(path, [insertionSort, mergeSort], [1, 1])
             break
         else:
             continue
