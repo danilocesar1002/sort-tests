@@ -31,10 +31,7 @@ def merge(arr, copy, start, mid, end):
         arr[i] = copy[i]
 
 def mergeSortHelper(arr, copy, start, end):
-    if (start >= end):
-        return
-    if (start + 1 == end):
-        copy[start] = arr[start]
+    if (start + 1 >= end):
         return
     # else...
     mid = (start + end) // 2
