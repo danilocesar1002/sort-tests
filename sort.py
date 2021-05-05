@@ -48,7 +48,7 @@ def mergeSort(arr):
 # counting-sort
 def countingSort(arr, leftLimit, rightLimit):
     freqs = [0] * (rightLimit - leftLimit + 1)
-    new = [0] * len(arr)
+    ordered = [0] * len(arr)
 
     for i in range(len(arr)):
         freqs[arr[i] - leftLimit] += 1
@@ -57,12 +57,12 @@ def countingSort(arr, leftLimit, rightLimit):
         freqs[i] += freqs[i - 1]
     
     for i in range(len(arr) - 1, -1, -1):
-        new[freqs[arr[i] - leftLimit] - 1] = arr[i]
+        ordered[freqs[arr[i] - leftLimit] - 1] = arr[i]
         freqs[arr[i] - leftLimit] -= 1
     
     #for i in range(len(arr)):
     #    arr[i] = new[i]
-    arr[:] = new
+    arr[:] = ordered
 
 # heap-sort and its subroutines
 def siftDown(arr, length, i):
@@ -79,7 +79,6 @@ def siftDown(arr, length, i):
         arr[i], arr[maxIndex] = arr[maxIndex], arr[i]
         siftDown(arr, length, maxIndex)
 
-
 def heapSort(arr):
     for i in range(len(arr) // 2 - 1, -1, -1):
         siftDown(arr, len(arr), i)
@@ -87,3 +86,28 @@ def heapSort(arr):
     for i in range(len(arr) - 1, 0, -1):
         arr[0], arr[i] = arr[i], arr[0]
         siftDown(arr, i, 0)
+
+# quick-sort and its subroutines
+def partition(arr, left, right):
+    x = arr[right]
+    i = left - 1
+    
+    for j in range(left, right):
+        if arr[j] <= x:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    
+    arr[i + 1], arr[right] = arr[right], arr[i + 1]
+    return i + 1
+
+def quickSortHelper(arr, left, right):
+    if left >= right:
+        return
+    # else...
+    pivot = partition(arr, left, right)
+    
+    quickSortHelper(arr, left, pivot - 1)
+    quickSortHelper(arr, pivot + 1, right)
+
+def quickSort(arr):
+    quickSortHelper(arr, 0, len(arr) - 1)
