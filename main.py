@@ -1,20 +1,23 @@
 import os
 from sort import (
     insertionSort,
-    mergeSort
+    mergeSort,
+    heapSort,
+    countingSort,
+    quickSort
 )
 from test import test
 
 
-def makeTest(filePath, sortingAlgorithms, deltas):
-    assert(len(sortingAlgorithms) == len(deltas))
+def makeTest(filePath, sortingAlgorithms, starters, deltas):
+    assert(len(sortingAlgorithms) == len(deltas) == len(starters))
     # Runs the tests and saves them in filePath (assumes is a file path string)
     testFile = open(filePath, "w")
     testFile.write("")
     testFile.close()
     
     for i in range(len(deltas)):
-        test(filePath, sortingAlgorithms[i], deltas[i],timeLimit=2)
+        test(filePath, sortingAlgorithms[i], n=starters[i], dn=deltas[i], timeLimit=2)
 
 def main():
     path = os.getcwd() + "/test.txt"
@@ -26,7 +29,11 @@ def main():
     
     while (inpt := input("¿Desea iniciar con las pruebas? (s/n): ")) != "n":
         if inpt == "s":
-            makeTest(path, [insertionSort, mergeSort], [1, 1])
+            makeTest(
+                path,
+                [1, 1, 1, 5000, 1],
+                [insertionSort, mergeSort, heapSort, countingSort, quickSort]
+            )
             break
         else:
             continue
