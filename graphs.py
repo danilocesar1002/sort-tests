@@ -18,8 +18,8 @@ def main():
     names = [
         "insertion-sort",
         "merge-sort",
-        "heap-sort",
         "counting-sort",
+        "heap-sort",
         "quick-sort"
     ]
 
