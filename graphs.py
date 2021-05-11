@@ -6,9 +6,11 @@ def movingAverage(x, w):
     return np.convolve(x, np.ones(w), 'valid') / w
 
 def makePlot(test, name, ax):
-    movAvg = movingAverage(test[1], len(test[1])//100 + 1)
-    ax.plot(range(int(test[0][0]), int(test[0][0]) + len(movAvg)), movAvg)
-    ax.scatter(test[0], test[1], s=0.5, alpha=0.3, label=name)
+    test[1] = [(10** 6) * k for k in test[1]]
+    movAvg = movingAverage(test[1], len(test[1])//100)
+    
+    ax.plot(range(int(test[0][0]), int(test[0][0]) + len(movAvg)), movAvg, label=name)
+    ax.scatter(test[0], test[1], s=0.3, alpha=0.3)
 
 
 def main():
@@ -30,7 +32,8 @@ def main():
     ax.set_xlabel("n")
     ax.set_ylabel("T(n)")
     
-    for i in range(len(tests)):
+    sortsToShow = [0,1,2,3,4]
+    for i in sortsToShow:
         makePlot(tests[i], names[i], ax)
 
     plt.legend()
