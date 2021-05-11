@@ -1,4 +1,7 @@
-from numpy import median
+from numpy import (
+    mean,
+    median
+)
 from numpy.random import randint
 from time import time
 
@@ -24,10 +27,21 @@ def test(filePath,
          sortingAlgorithm,
          n = 1,
          dn = 1,
+         measure = "median",
          timeLimit = 5*60, # in seconds
          sortsPerTest = 100):
     results = open(filePath, "a")
     results.write("[")
+
+    if measure == "median":
+        measureFunction = median
+    elif measure == "mean":
+        measureFunction = mean
+    else:
+        results.write("]\n")
+        results.close()
+        return
+        
     
     while True:
         result = sortTest(n,
@@ -35,7 +49,7 @@ def test(filePath,
                           timeLimit,
                           sortsPerTest
             )
-        res = median(result)
+        res = measureFunction(result)
         
         if 0 < len(result):
             results.write( str([n, res]) )

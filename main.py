@@ -2,22 +2,22 @@ import os
 from sort import (
     insertionSort,
     mergeSort,
-    heapSort,
     countingSort,
+    heapSort,
     quickSort
 )
 from test import test
 
 
-def makeTest(filePath, sortingAlgorithms, starters, deltas):
-    assert(len(sortingAlgorithms) == len(deltas) == len(starters))
+def makeTest(filePath, sortingAlgorithms, starters, deltas, measures):
+    assert(len(sortingAlgorithms) == len(starters) == len(deltas) == len(measures))
     # Runs the tests and saves them in filePath (assumes is a file path string)
     testFile = open(filePath, "w")
     testFile.write("")
     testFile.close()
     
     for i in range(len(deltas)):
-        test(filePath, sortingAlgorithms[i], n=starters[i], dn=deltas[i], timeLimit=2)
+        test(filePath, sortingAlgorithms[i], n=starters[i], dn=deltas[i], measure=measures[i], timeLimit=2)
 
 def main():
     path = os.getcwd() + "/test.txt"
@@ -31,13 +31,18 @@ def main():
         if inpt == "s":
             makeTest(
                 path,
-                [1, 1, 1, 5000, 1],
-                [insertionSort, mergeSort, heapSort, countingSort, quickSort]
+                [insertionSort, mergeSort, countingSort, heapSort, quickSort],
+                [1, 1, 5000, 1, 1],
+                [1, 1, 1, 1, 1],
+                [
+                    "median", "median", "median", "median",
+                    "mean" # just for quicksort
+                ]
             )
             break
         else:
             continue
-    
+
 
 if __name__ == "__main__":
     main()

@@ -46,7 +46,7 @@ def mergeSort(arr):
     mergeSortHelper(arr, copy, 0, len(arr))
 
 # counting-sort
-def countingSort(arr, leftLimit, rightLimit):
+def countingSort(arr, leftLimit=1, rightLimit=5000):
     freqs = [0] * (rightLimit - leftLimit + 1)
     ordered = [0] * len(arr)
 
