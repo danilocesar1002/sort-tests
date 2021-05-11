@@ -7,7 +7,7 @@ def movingAverage(x, w):
 
 def makePlot(test, name, ax):
     movAvg = movingAverage(test[1], len(test[1])//100 + 1)
-    ax.plot(range(len(test[1]) - len(movAvg), len(test[1])), movAvg)
+    ax.plot(range(int(test[0][0]), int(test[0][0]) + len(movAvg)), movAvg)
     ax.scatter(test[0], test[1], s=0.5, alpha=0.3, label=name)
 
 
