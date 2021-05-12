@@ -32,12 +32,9 @@ def main():
             makeTest(
                 path,
                 [insertionSort, mergeSort, countingSort, heapSort, quickSort],
-                [1, 1, 5000, 1, 1],
-                [1, 1, 1, 1, 1],
-                [
-                    "median", "median", "median", "median",
-                    "mean" # just for quicksort
-                ]
+                [1] * 5,
+                [1] * 5,
+                ["median"] * 5
             )
             break
         else:
