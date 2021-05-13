@@ -6,7 +6,13 @@ from numpy.random import randint
 from time import time
 
 class Test:
-    def __init__(self, sortingAlgorithm, measure = "median", starter = 1, delta = 1, sortsPerTest = 100, timeLimit = 2):
+    def __init__(self, 
+                 sortingAlgorithm,
+                 measure = "median",
+                 starter = 1,
+                 delta = 1,
+                 sortsPerTest = 100,
+                 timeLimit = 2):
         self._sortingAlgorithm = sortingAlgorithm
         self._measure = measure
         self._starter = starter
