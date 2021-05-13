@@ -2,7 +2,8 @@ import os
 from sort import sortingAlgorithms
 from test import Test
 
-def main():
+
+if __name__ == "__main__":
     path = os.getcwd() + "/test.txt"
 
     print("Este es un script de pruebas para algoritmos de ordenamiento.")
@@ -22,7 +23,3 @@ def main():
             break
         else:
             continue
-
-
-if __name__ == "__main__":
-    main()

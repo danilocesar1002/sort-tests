@@ -14,7 +14,7 @@ def makePlot(test, name, ax):
     ax.scatter(test[0], test[1], s=0.3, alpha=0.3)
 
 
-def main():
+if __name__ == "__main__":
     tests = open("test.txt", "r").read().splitlines()
     tests = [eval(test) for test in tests]
     tests = [np.transpose(test) for test in tests]
@@ -32,8 +32,3 @@ def main():
 
     plt.legend()
     plt.show()
-
-
-
-if __name__ == "__main__":
-    main()
