@@ -111,3 +111,12 @@ def quickSortHelper(arr, left, right):
 
 def quickSort(arr):
     quickSortHelper(arr, 0, len(arr) - 1)
+
+
+sortingAlgorithms = [
+    insertionSort,
+    mergeSort,
+    countingSort,
+    heapSort,
+    quickSort
+]

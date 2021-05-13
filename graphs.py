@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from sort import sortingAlgorithms
 
 
 def movingAverage(x, w):
@@ -17,13 +18,7 @@ def main():
     tests = open("test.txt", "r").read().splitlines()
     tests = [eval(test) for test in tests]
     tests = [np.transpose(test) for test in tests]
-    names = [
-        "insertion-sort",
-        "merge-sort",
-        "counting-sort",
-        "heap-sort",
-        "quick-sort"
-    ]
+    names = [algorithm.__name__ for algorithm in sortingAlgorithms]
 
     assert len(names) == len(tests)
 
@@ -32,8 +27,7 @@ def main():
     ax.set_xlabel("n")
     ax.set_ylabel("T(n)")
     
-    sortsToShow = [0,1,2,3,4]
-    for i in sortsToShow:
+    for i in range(len(tests)):
         makePlot(tests[i], names[i], ax)
 
     plt.legend()
