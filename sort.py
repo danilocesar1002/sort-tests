@@ -70,9 +70,9 @@ def siftDown(arr, length, i):
     left = 2 * i + 1
     right = 2 * i + 2
 
-    if left < length and not arr[left] <= arr[maxIndex]:
+    if left < length and arr[left] > arr[maxIndex]:
         maxIndex = left
-    if right < length and not arr[right] <= arr[maxIndex]:
+    if right < length and arr[right] > arr[maxIndex]:
         maxIndex = right
 
     if i != maxIndex:
