@@ -94,7 +94,8 @@ def TeXSiftDown(arr, length, parent):
 
 
 def TeXExtractMax(arr):
+    procedure = [heapToTeX(arr)]
     arr[0], arr[-1] = arr[-1], arr[0]
     
-    procedure = TeXSiftDown(arr, len(arr) - 1, 0)
+    procedure += TeXSiftDown(arr, len(arr) - 1, 0)
     return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
