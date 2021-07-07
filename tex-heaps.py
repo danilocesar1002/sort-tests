@@ -15,10 +15,11 @@ def heapToTeX(arr,
              config="[scale=0.7,heapnode/.style={circle, draw=black, very thick}" + 
              ",arraynode/.style={circle, draw=black, fill=black!20, very thick}]"
              ):
-    assert len(arr) > 0
-    assert 0 <= heapSize <= len(arr)
     if heapSize == -1:
         heapSize = len(arr)
+    
+    assert len(arr) > 0
+    assert 0 <= heapSize <= len(arr)
 
 
     coords = [[0, log2Floor(len(arr))]] + [None for _ in range(len(arr) - 1)]
@@ -61,7 +62,7 @@ def TeXHeapSort(arr):
 
     for i in range(len(arr) - 1, 0, -1):
         arr[0], arr[i] = arr[i], arr[0]
-        procedure.append(heapToTeX(arr, i))
         siftDown(arr, i, 0)
+        procedure.append(heapToTeX(arr, i))
     
     return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
