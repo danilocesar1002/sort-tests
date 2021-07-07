@@ -2,6 +2,7 @@ from sort import (
     siftDown
 )
 
+
 def log2Floor(n):
     res = 1
     while (n >> res) > 0:
@@ -51,7 +52,7 @@ def heapToTeX(arr,
             lines.append("({}) edge ({})".format(i, right))
 
 
-    return  "\\begin{{tikzpicture}}{}{}\n{}\n\\end{{tikzpicture}}".format(config, "\n".join(nodes), "\\draw\n" + "\n".join(lines) + ";")
+    return  "\\begin{{tikzpicture}}{}\n{}\n{}\n\\end{{tikzpicture}}".format(config, "\n".join(nodes), "\\draw\n" + "\n".join(lines) + ";")
 
 
 def TeXHeapSort(arr):
@@ -65,4 +66,35 @@ def TeXHeapSort(arr):
         siftDown(arr, i, 0)
         procedure.append(heapToTeX(arr, i))
     
+    return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
+
+
+def TeXSiftDown(arr, length, parent):
+    procedure = [heapToTeX(arr, length)]
+    stack = [parent]
+
+    while len(stack) > 0:
+        #recicled from siftDown
+        i = stack.pop()
+        maxIndex = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        if left < length and arr[left] > arr[maxIndex]:
+            maxIndex = left
+        if right < length and arr[right] > arr[maxIndex]:
+            maxIndex = right
+
+        if i != maxIndex:
+            arr[i], arr[maxIndex] = arr[maxIndex], arr[i]
+            procedure.append(heapToTeX(arr, length))
+            stack.append(maxIndex)
+    
+    return procedure
+
+
+def TeXExtractMax(arr):
+    arr[0], arr[-1] = arr[-1], arr[0]
+    
+    procedure = TeXSiftDown(arr, len(arr) - 1, 0)
     return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
