@@ -11,12 +11,14 @@ def log2Floor(n):
 
 
 def heapToTeX(arr,
-             heapSize,
+             heapSize = -1,
              config="[scale=0.7,heapnode/.style={circle, draw=black, very thick}" + 
              ",arraynode/.style={circle, draw=black, fill=black!20, very thick}]"
              ):
     assert len(arr) > 0
     assert 0 <= heapSize <= len(arr)
+    if heapSize == -1:
+        heapSize = len(arr)
 
 
     coords = [[0, log2Floor(len(arr))]] + [None for _ in range(len(arr) - 1)]
