@@ -11,6 +11,10 @@ def log2Floor(n):
     return res - 1
 
 
+def finalString(procedure):
+    return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
+
+
 def heapToTeX(arr,
              heapSize = -1,
              config="[scale=0.7,heapnode/.style={circle, draw=black, very thick}" + 
@@ -66,7 +70,7 @@ def TeXHeapSort(arr):
         siftDown(arr, i, 0)
         procedure.append(heapToTeX(arr, i))
     
-    return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
+    return finalString(procedure)
 
 
 def TeXSiftDown(arr, length, parent):
@@ -98,4 +102,22 @@ def TeXExtractMax(arr):
     arr[0], arr[-1] = arr[-1], arr[0]
     
     procedure += TeXSiftDown(arr, len(arr) - 1, 0)
-    return "\n\n".join(["\\begin{{figure}}[H]\n\\centering\n{}\n\n({})\n\\end{{figure}}".format(procedure[i], i + 1) for i in range(len(procedure))])
+    return finalString(procedure)
+
+
+def TeXAddHeapKey(arr, key):
+    procedure = [heapToTeX(arr)]
+    arr.append(key)
+
+    i = len(arr) - 1
+    while i > 0:
+        parent = (i - 1) // 2
+        if arr[parent] >= arr[i]:
+            break
+        # else...
+        procedure.append(heapToTeX(arr))
+        arr[i], arr[parent] = arr[parent], arr[i]
+        i = parent
+    
+    procedure.append(heapToTeX(arr))
+    return finalString(procedure)
